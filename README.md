@@ -1,4 +1,4 @@
-WiSHFUL iperf Driver
+WiSHFUL CoAPthon Driver
 ============================
 
 This is a prototypic implementation of a wireless agent providing the Unified
