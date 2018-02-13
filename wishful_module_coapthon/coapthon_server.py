@@ -29,7 +29,7 @@ class BasicResource(Resource):
 class CoAPServer(CoAP):
     def __init__(self, host, port, multicast=False):
         CoAP.__init__(self, (host, port), multicast)
-        self.add_resource('basic/', BasicResource())
+        self.add_resource('hello/', BasicResource())
 
         print(("CoAP Server start on " + host + ":" + str(port)))
         print((self.root.dump()))

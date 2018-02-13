@@ -49,7 +49,7 @@ class CoapthonModule(wishful_module.AgentModule):
     @wishful_module.bind_function(upis.net.create_packetflow_sink)
     def start_server(self, port):
         self.log.debug("Starts Coap server on port {}".format(port))
-        ip = "0.0.0.0"
+        ip = "fd00::1"
         multicast = False
         self.server = CoAPServer(ip, port, multicast)
 
@@ -96,13 +96,13 @@ class CoapthonModule(wishful_module.AgentModule):
 
                if self.payload == 0:
 
-                       request = self.client.get("basic", self.receive_response)
+                       request = self.client.get("hello", self.receive_response)
 
                else:
 
                        payload = ''.join('x' for x in range(self.payload))        
 
-                       request = self.client.put("basic", payload, self.receive_response)
+                       request = self.client.put("hello", payload, self.receive_response)
 
                print((request.pretty_print()))
 
