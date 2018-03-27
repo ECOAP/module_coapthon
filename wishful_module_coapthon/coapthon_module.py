@@ -46,6 +46,10 @@ class CoapthonModule(wishful_module.AgentModule):
         self.measurements['app_stats']['app_avg_retx'] = 0 # Still to be implemented
         self.measurements['app_stats']['app_avg_loss'] = 0
 
+        # Event management
+        self.event_list = None
+        self.event_callback = None
+
     @wishful_module.bind_function(upis.net.create_packetflow_sink)
     def start_server(self, port):
         self.log.debug("Starts Coap server on port {}".format(port))
@@ -175,3 +179,12 @@ class CoapthonModule(wishful_module.AgentModule):
             thread.start_new_thread(self.get_net_measurements_periodic_worker, ( measurement_key_list, collect_period, report_period, num_iterations, report_callback,))
         except:
             traceback.print_exc(file=sys.stdout)
+
+
+    @wishful_module.bind_function(upis.net.subscribe_events_net)
+    def define_net_event(self, event_key_list, event_callback, event_duration):
+        print("Event subscribed")
+        print(str(event_key_list))
+        print((str(event_callback)))
+        self.event_list = event_key_list
+        self.event_callback = event_callback
